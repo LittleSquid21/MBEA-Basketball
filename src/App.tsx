@@ -295,38 +295,38 @@ export default function App() {
 
   return (
     <div className="min-h-screen text-white pb-32 font-sans selection:bg-accent-cyan selection:text-black">
-      <div className="fixed top-4 right-4 z-50 flex gap-2">
+      <div className="fixed top-3 right-3 sm:top-5 sm:right-5 z-50 flex gap-1.5 sm:gap-2 scale-90 sm:scale-100 origin-top-right">
         <button 
           onClick={handleShare}
-          className="flex items-center gap-2 bg-white/5 hover:bg-white/10 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-bold transition-all border border-white/10 shadow-xl"
+          className="flex items-center gap-1.5 sm:gap-2 bg-slate-950/80 hover:bg-white/10 backdrop-blur-md text-white px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all border border-white/10 shadow-xl"
         >
-          <Share2 size={16} className="text-accent-gold" />
-          分享网站
+          <Share2 size={14} className="text-accent-gold" />
+          分享
         </button>
 
         {user ? (
-          <div className="flex items-center gap-2 bg-slate-900/80 backdrop-blur-md p-1 pr-4 rounded-full border border-white/10 shadow-xl">
-            <img src={user.photoURL || undefined} alt="" className="w-8 h-8 rounded-full border border-white/20" referrerPolicy="no-referrer" />
+          <div className="flex items-center gap-1.5 sm:gap-2 bg-slate-900/80 backdrop-blur-md p-0.5 pr-3 sm:p-1 sm:pr-4 rounded-full border border-white/10 shadow-xl">
+            <img src={user.photoURL || undefined} alt="" className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/20" referrerPolicy="no-referrer" />
             <span className="text-xs font-bold hidden md:block">{user.displayName}</span>
-            <button onClick={handleLogout} className="p-2 hover:text-accent-cyan transition-colors" title="退出登录">
-              <LogOut size={16} />
+            <button onClick={handleLogout} className="p-1.5 sm:p-2 hover:text-accent-cyan transition-colors" title="退出登录">
+              <LogOut size={14} />
             </button>
             {isAdmin && (
               <>
                 <button 
                   onClick={() => setShowAdminPanel(true)}
-                  className="p-2 text-accent-gold hover:text-yellow-400 transition-colors"
+                  className="p-1.5 sm:p-2 text-accent-gold hover:text-yellow-400 transition-colors"
                   title="管理面板"
                 >
-                  <Settings size={16} />
+                  <Settings size={14} />
                 </button>
                 <button 
                   onClick={seedDatabase} 
                   disabled={isSeeding}
-                  className="p-2 text-accent-gold hover:text-yellow-400 transition-colors disabled:opacity-50"
+                  className="p-1.5 sm:p-2 text-accent-gold hover:text-yellow-400 transition-colors disabled:opacity-50"
                   title="初始化演示数据"
                 >
-                  {isSeeding ? <Loader2 size={16} className="animate-spin" /> : <Database size={16} />}
+                  {isSeeding ? <Loader2 size={14} className="animate-spin" /> : <Database size={14} />}
                 </button>
               </>
             )}
@@ -334,9 +334,9 @@ export default function App() {
         ) : (
           <button 
             onClick={handleLogin}
-            className="flex items-center gap-2 bg-accent-gold hover:bg-yellow-500 text-black px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-accent-gold/20"
+            className="flex items-center gap-1.5 sm:gap-2 bg-accent-gold hover:bg-yellow-500 text-black px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all shadow-lg shadow-accent-gold/20"
           >
-            <LogIn size={16} />
+            <LogIn size={14} />
             管理员登录
           </button>
         )}

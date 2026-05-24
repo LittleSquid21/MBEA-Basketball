@@ -30,8 +30,9 @@ export default function StandingsTable({ teams, onSelectTeam }: StandingsTablePr
   });
 
   return (
-    <div className="rounded-xl border border-white/10 bg-zinc-900/50 overflow-hidden backdrop-blur-sm">
-      <Table>
+    <div className="rounded-xl border border-white/10 bg-zinc-900/50 overflow-x-auto backdrop-blur-sm select-none scrollbar-thin scrollbar-thumb-white/10">
+      <div className="min-w-[690px] md:min-w-0">
+        <Table>
         <TableHeader className="bg-white/5">
           <TableRow className="hover:bg-transparent border-white/10">
             <TableHead className="w-16 text-center text-zinc-400 font-bold">排名</TableHead>
@@ -94,6 +95,7 @@ export default function StandingsTable({ teams, onSelectTeam }: StandingsTablePr
           })}
         </TableBody>
       </Table>
+      </div>
     </div>
   );
 }

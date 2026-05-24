@@ -180,8 +180,13 @@ export default function Playoffs({ games, teams, isAdmin }: PlayoffsProps) {
         </div>
       </div>
  
+      {/* Mobile Swipe Hint */}
+      <div className="lg:hidden flex items-center justify-center gap-1.5 text-xs font-bold text-accent-gold/80 bg-accent-gold/5 border border-accent-gold/10 px-4 py-2.5 rounded-full mb-6 w-fit mx-auto animate-pulse">
+        <span>↔️</span> 左右滑动查看完整季后赛对阵图
+      </div>
+
       {/* Visual Tournament Bracket */}
-      <div className="relative bg-slate-950/40 backdrop-blur-md rounded-[2.5rem] border border-white/5 p-6 md:p-12 shadow-inner overflow-x-auto min-w-full">
+      <div className="relative bg-slate-950/40 opacity-100 backdrop-blur-md rounded-[2.5rem] border border-white/5 p-6 md:p-12 shadow-inner overflow-x-auto min-w-full">
         <div id="bracket-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 items-center min-w-[760px] relative py-8">
           
           {/* Section: Semifinals (Left, cols: 5) */}

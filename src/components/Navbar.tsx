@@ -18,48 +18,50 @@ function NavItem({ icon, label, active, onClick }: NavItemProps) {
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 ${
+      className={`flex-1 sm:flex-initial flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-2 px-2.5 py-1.5 sm:px-5 sm:py-2.5 rounded-xl sm:rounded-full transition-all duration-300 ${
         active
-          ? 'bg-accent-gold text-black shadow-lg shadow-accent-gold/20'
-          : 'text-gray-400 hover:text-white hover:bg-white/5'
+          ? 'bg-accent-gold text-black shadow-lg shadow-accent-gold/20 font-bold scale-[1.02] sm:scale-100'
+          : 'text-zinc-400 hover:text-white hover:bg-white/5 active:bg-white/5'
       }`}
     >
-      {icon}
-      <span className="font-medium">{label}</span>
+      <div className="flex-shrink-0 transition-transform active:scale-95 duration-150">
+        {React.cloneElement(icon as React.ReactElement, { size: 18 })}
+      </div>
+      <span className="font-semibold text-[10px] sm:text-sm tracking-tight sm:tracking-normal whitespace-nowrap">{label}</span>
     </button>
   );
 }
 
 export default function Navbar({ activeTab, setActiveTab }: { activeTab: string; setActiveTab: (tab: string) => void }) {
   return (
-    <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-black/80 backdrop-blur-xl border border-white/10 p-2 rounded-full shadow-2xl">
-      <div className="flex items-center gap-1">
+    <nav className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 w-[92%] max-w-[480px] sm:w-auto z-50 bg-slate-950/90 backdrop-blur-2xl border border-white/10 p-1.5 sm:p-2 rounded-2xl sm:rounded-full shadow-2xl">
+      <div className="flex items-center justify-between sm:justify-start gap-1 sm:gap-2 w-full">
         <NavItem
-          icon={<Home size={20} />}
+          icon={<Home />}
           label="首页"
           active={activeTab === 'home'}
           onClick={() => setActiveTab('home')}
         />
         <NavItem
-          icon={<Calendar size={20} />}
+          icon={<Calendar />}
           label="赛程"
           active={activeTab === 'schedule'}
           onClick={() => setActiveTab('schedule')}
         />
         <NavItem
-          icon={<Trophy size={20} />}
+          icon={<Trophy />}
           label="排名"
           active={activeTab === 'standings'}
           onClick={() => setActiveTab('standings')}
         />
         <NavItem
-          icon={<Users size={20} />}
+          icon={<Users />}
           label="球队"
           active={activeTab === 'teams'}
           onClick={() => setActiveTab('teams')}
         />
         <NavItem
-          icon={<Crown size={20} className="text-accent-gold" />}
+          icon={<Crown className="text-accent-gold" />}
           label="季后赛"
           active={activeTab === 'playoffs'}
           onClick={() => setActiveTab('playoffs')}
