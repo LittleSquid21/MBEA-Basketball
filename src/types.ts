@@ -40,6 +40,7 @@ export interface Game {
   status: GameStatus;
   venue: string;
   stage?: string;
+  isTentative?: boolean;
 }
 
 export interface News {

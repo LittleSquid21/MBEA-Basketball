@@ -320,7 +320,7 @@ export default function Playoffs({ games, teams, isAdmin }: PlayoffsProps) {
                   <div className="space-y-4">
                     {/* Home Winner Placeholder/Dynamic */}
                     <FinalTeamRow 
-                      team={getTeam(f1.homeTeamId)} 
+                      team={sf1WinnerId ? getTeam(sf1WinnerId) : undefined} 
                       score={f1.homeScore} 
                       status={f1.status} 
                       isWinner={f1.status === 'finished' && f1.homeScore > f1.awayScore}
@@ -336,7 +336,7 @@ export default function Playoffs({ games, teams, isAdmin }: PlayoffsProps) {
 
                     {/* Away Winner Placeholder/Dynamic */}
                     <FinalTeamRow 
-                      team={getTeam(f1.awayTeamId)} 
+                      team={sf2WinnerId ? getTeam(sf2WinnerId) : undefined} 
                       score={f1.awayScore} 
                       status={f1.status} 
                       isWinner={f1.status === 'finished' && f1.awayScore > f1.homeScore}

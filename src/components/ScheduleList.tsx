@@ -51,10 +51,17 @@ export default function ScheduleList({ games, teams, onSelectGame }: ScheduleLis
                   <div className="text-zinc-400 text-sm font-bold mb-1">
                     {date.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric', timeZone: 'UTC' })}
                   </div>
-                  <div className="flex items-center gap-1 text-white font-black mb-2">
-                    <Clock size={14} className="text-orange-600" />
-                    {date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'UTC' })}
-                  </div>
+                  {game.isTentative ? (
+                    <div className="flex items-center gap-1 text-accent-gold font-bold mb-2 text-xs bg-accent-gold/10 border border-accent-gold/20 px-2 py-0.5 rounded-full">
+                      <Clock size={12} className="text-accent-gold" />
+                      时间暂定
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-1 text-white font-black mb-2">
+                      <Clock size={14} className="text-orange-600" />
+                      {date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'UTC' })}
+                    </div>
+                  )}
                   <Badge variant={game.status === 'live' ? 'destructive' : 'secondary'} className="uppercase text-[10px] font-black tracking-widest">
                     {game.status === 'finished' ? '已结束' : game.status === 'live' ? '进行中' : '未开始'}
                   </Badge>

@@ -18,6 +18,7 @@ import PlayerStats from './components/PlayerStats';
 import AdminPanel from './components/AdminPanel';
 import Playoffs from './components/Playoffs';
 import TeamLogo from './components/TeamLogo';
+import NewsImage from './components/NewsImage';
 import { Team, Player, Game, News } from './types';
 import { motion, AnimatePresence } from 'motion/react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -266,6 +267,10 @@ export default function App() {
 
   // Match news item images with stable Unsplash URLs and provide beautiful fallbacks
   const displayNews = news.map(n => {
+    // Force the custom-designed tournament playoff flyer for the main playoff news n2
+    if (n.id === 'n2' || n.title?.includes('常规赛收官') || n.title?.includes('季后赛战鼓')) {
+      return { ...n, imageUrl: '/meba_banner.png' };
+    }
     const mock = MOCK_NEWS.find(m => m.id === n.id || m.title === n.title);
     let imageUrl = n.imageUrl || '';
     if (mock) {
@@ -301,7 +306,7 @@ export default function App() {
 
         {user ? (
           <div className="flex items-center gap-2 bg-slate-900/80 backdrop-blur-md p-1 pr-4 rounded-full border border-white/10 shadow-xl">
-            <img src={user.photoURL || ''} alt="" className="w-8 h-8 rounded-full border border-white/20" referrerPolicy="no-referrer" />
+            <img src={user.photoURL || undefined} alt="" className="w-8 h-8 rounded-full border border-white/20" referrerPolicy="no-referrer" />
             <span className="text-xs font-bold hidden md:block">{user.displayName}</span>
             <button onClick={handleLogout} className="p-2 hover:text-accent-cyan transition-colors" title="退出登录">
               <LogOut size={16} />
@@ -415,11 +420,11 @@ export default function App() {
                       onClick={() => setSelectedNewsIdForModal(item.id)}
                     >
                       <div className="aspect-[16/10] overflow-hidden">
-                        <img 
-                          src={item.imageUrl} 
-                          alt={item.title} 
+                        <NewsImage 
+                          newsId={item.id}
+                          imageUrl={item.imageUrl}
+                          title={item.title}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                          referrerPolicy="no-referrer"
                         />
                       </div>
                       <CardHeader className="pb-2">
@@ -705,10 +710,17 @@ export default function App() {
                     <div className="text-slate-400 text-sm font-bold">
                       {date.toLocaleDateString('zh-CN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}
                     </div>
-                    <div className="text-accent-gold text-lg font-black flex items-center justify-center gap-1.5">
-                      <Clock size={16} />
-                      {date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'UTC' })}
-                    </div>
+                    {game.isTentative ? (
+                      <div className="text-accent-gold text-lg font-black flex items-center justify-center gap-1.5 animate-pulse bg-accent-gold/10 border border-accent-gold/20 px-4 py-1.5 rounded-full inline-flex mx-auto scale-95">
+                        <Clock size={16} />
+                        时间暂定
+                      </div>
+                    ) : (
+                      <div className="text-accent-gold text-lg font-black flex items-center justify-center gap-1.5">
+                        <Clock size={16} />
+                        {date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'UTC' })}
+                      </div>
+                    )}
                     <div className="text-slate-500 text-sm font-medium">球馆: {game.venue}</div>
                   </div>
 
@@ -766,7 +778,12 @@ export default function App() {
                 className="w-full max-w-2xl max-h-[85vh] bg-slate-900 border border-white/10 overflow-hidden flex flex-col shadow-2xl rounded-3xl"
               >
                 <div className="aspect-[16/9] w-full overflow-hidden relative">
-                  <img src={item.imageUrl} alt="" className="w-full h-full object-cover" />
+                  <NewsImage 
+                    newsId={item.id}
+                    imageUrl={item.imageUrl}
+                    title={item.title}
+                    className="w-full h-full object-cover"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-black/60 flex items-start justify-between p-6">
                     <span className="bg-accent-gold text-black px-3 py-1 rounded-full text-xs font-bold font-mono">
                       {new Date(item.date).toLocaleDateString('zh-CN')}

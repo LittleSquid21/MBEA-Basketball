@@ -165,6 +165,7 @@ export const MOCK_GAMES: Game[] = [
     status: 'scheduled',
     venue: '待定',
     stage: 'semifinal_1',
+    isTentative: true,
   },
   {
     id: 'g_playoff_sf2',
@@ -176,6 +177,7 @@ export const MOCK_GAMES: Game[] = [
     status: 'scheduled',
     venue: '待定',
     stage: 'semifinal_2',
+    isTentative: true,
   },
   {
     id: 'g_playoff_f1',
@@ -195,7 +197,7 @@ export const MOCK_NEWS: News[] = [
     id: 'n2',
     title: 'MEBA常规赛收官！季后赛战鼓隆隆，5月30日巅峰对决在即',
     content: '各位平安，MEBA 2026赛季篮球常规赛赛事在本周六（5月23日）后就全部落下了帷幕。目前首轮常规赛积分排名尘埃落定：绿袍骑士以 3 胜 0 负稳居第一名，黑门（Hermon）以极微弱的得失分优势力压 Super Class 和 树人慢脚取得第 2名，Super Class 取得第 3 名，树人慢脚居第 4 名。\n\n接下来的几周，MEBA 将开启更加热血、激烈的季后赛赛制！对决双方将严格根据常规赛胜场排名对战：\n在 5 月 30 日（下周六）进行的半决赛中：\n- 常规赛第一名（绿袍骑士） VS 常规赛第四名（树人慢脚）\n- 常规赛第二名（黑门） VS 常规赛第三名（Super Class）\n\n本阶段除总决赛赛制为“三局两胜”（Best of 3）外，其余所有季后赛对决均采用“单败淘汰制”，一次定胜负，败者直接出局。战歌已奏响，究竟谁能突出重围挺进总决赛？让我们拭目以待！',
-    imageUrl: 'https://images.unsplash.com/photo-1519766304817-4f37bda74a27?auto=format&fit=crop&q=80&w=800',
+    imageUrl: '/meba_banner.png',
     date: '2026-05-23T22:00:00Z',
   },
   {
