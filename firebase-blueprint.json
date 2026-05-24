@@ -1,0 +1,70 @@
+{
+  "entities": {
+    "Team": {
+      "title": "Team",
+      "description": "A basketball team in the MEBA league.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Team name" },
+        "logoUrl": { "type": "string", "format": "uri", "description": "URL to the team's logo" },
+        "wins": { "type": "number", "description": "Number of wins" },
+        "losses": { "type": "number", "description": "Number of losses" },
+        "pointsFor": { "type": "number", "description": "Total points scored" },
+        "pointsAgainst": { "type": "number", "description": "Total points conceded" },
+        "rank": { "type": "number", "description": "Current league rank" }
+      },
+      "required": ["name", "wins", "losses"]
+    },
+    "Player": {
+      "title": "Player",
+      "description": "A basketball player in the MEBA league.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Player name" },
+        "teamId": { "type": "string", "description": "ID of the team the player belongs to" },
+        "number": { "type": "number", "description": "Jersey number" },
+        "position": { "type": "string", "description": "Player position (e.g., PG, SG, SF, PF, C)" },
+        "avgPoints": { "type": "number", "description": "Average points per game" },
+        "avgRebounds": { "type": "number", "description": "Average rebounds per game" },
+        "avgAssists": { "type": "number", "description": "Average assists per game" },
+        "avgSteals": { "type": "number", "description": "Average steals per game" },
+        "avgBlocks": { "type": "number", "description": "Average blocks per game" },
+        "gamesPlayed": { "type": "number", "description": "Total games played" }
+      },
+      "required": ["name", "teamId"]
+    },
+    "Game": {
+      "title": "Game",
+      "description": "A basketball match between two teams.",
+      "type": "object",
+      "properties": {
+        "homeTeamId": { "type": "string", "description": "ID of the home team" },
+        "awayTeamId": { "type": "string", "description": "ID of the away team" },
+        "homeScore": { "type": "number", "description": "Score of the home team" },
+        "awayScore": { "type": "number", "description": "Score of the away team" },
+        "date": { "type": "string", "format": "date-time", "description": "Date and time of the game" },
+        "status": { "type": "string", "enum": ["scheduled", "live", "finished"], "description": "Current status of the game" },
+        "venue": { "type": "string", "description": "Location of the game" }
+      },
+      "required": ["homeTeamId", "awayTeamId", "date", "status"]
+    },
+    "News": {
+      "title": "News",
+      "description": "Latest news and updates about the MEBA league.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "News headline" },
+        "content": { "type": "string", "description": "Full news content" },
+        "imageUrl": { "type": "string", "format": "uri", "description": "URL to the news image" },
+        "date": { "type": "string", "format": "date-time", "description": "Publication date" }
+      },
+      "required": ["title", "content", "date"]
+    }
+  },
+  "firestore": {
+    "/teams/{teamId}": { "schema": "Team", "description": "Collection of teams" },
+    "/players/{playerId}": { "schema": "Player", "description": "Collection of players" },
+    "/games/{gameId}": { "schema": "Game", "description": "Collection of games" },
+    "/news/{newsId}": { "schema": "News", "description": "Collection of news articles" }
+  }
+}

@@ -1,0 +1,208 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import { Team, Player, Game, News } from './types';
+
+export const MOCK_TEAMS: Team[] = [
+  {
+    id: 'team-green-knights',
+    name: '绿袍骑士',
+    logoUrl: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100" height="100"><defs><linearGradient id="gk_gold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23EBB848"/><stop offset="100%" stop-color="%23CBA045"/></linearGradient><linearGradient id="gk_green" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%231E7A44"/><stop offset="100%" stop-color="%230F4420"/></linearGradient></defs><rect width="512" height="512" rx="100" fill="%230D1B11" stroke="url(%23gk_gold)" stroke-width="8"/><g transform="translate(40, -10)"><path d="M220 100 C220 100 130 110 90 180 C50 250 80 340 80 340 L160 380 Q140 310 180 260 Q170 200 220 130 Z" fill="%23121212" stroke="url(%23gk_gold)" stroke-width="6"/><path d="M220 80 C320 60 400 140 400 240 C400 320 360 380 300 420 L220 400 L180 330 C180 330 160 270 200 210 Q220 180 220 80 Z" fill="url(%23gk_green)" stroke="url(%23gk_gold)" stroke-width="6"/><path d="M240 180 L320 180 L350 240 L310 300 L230 300 Z" fill="%23162A1F" stroke="url(%23gk_gold)" stroke-width="4"/><path d="M260 180 L260 300 M280 180 L280 300 M300 180 L300 300 M320 200 L320 280" stroke="url(%23gk_gold)" stroke-width="4"/><path d="M190 280 Q130 140 280 120" stroke="%232CD26E" stroke-width="8" stroke-linecap="round" fill="none"/></g><text x="256" y="445" font-family="system-ui, -apple-system, sans-serif" font-size="34" font-weight="900" fill="url(%23gk_gold)" text-anchor="middle" letter-spacing="4">GREEN KNIGHTS</text><text x="256" y="480" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="700" fill="%23FFFFFF" text-anchor="middle" letter-spacing="8" opacity="0.8">H E R M O N</text></svg>',
+    wins: 3,
+    losses: 0,
+    pointsFor: 187,
+    pointsAgainst: 117,
+    rank: 1,
+  },
+  {
+    id: 'team-black-gate',
+    name: '黑门',
+    logoUrl: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100" height="100"><defs><linearGradient id="hm_gold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23DFB86C"/><stop offset="100%" stop-color="%23CBA045"/></linearGradient><linearGradient id="hm_steel" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23ECEFF1"/><stop offset="50%" stop-color="%2390A4AE"/><stop offset="100%" stop-color="%2337474F"/></linearGradient></defs><rect width="512" height="512" rx="100" fill="%230D0E12" stroke="url(%23hm_gold)" stroke-width="8"/><path d="M256 60 L380 110 L380 260 Q380 340 256 390 Q132 340 132 260 L132 110 Z" fill="%231E222A" stroke="url(%23hm_gold)" stroke-width="6"/><g transform="translate(0, 10)"><path d="M256 120 C210 120 180 160 180 230 C180 310 210 320 256 320 C302 320 332 310 332 230 C332 160 302 120 256 120 Z" fill="url(%23hm_steel)" stroke="%2310141D" stroke-width="4"/><path d="M256 120 L256 320" stroke="%2310141D" stroke-width="3"/><path d="M200 200 H312 L300 240 H212 Z" fill="%2310141D"/><path d="M220 200 L220 240 M240 200 L240 240 M272 200 L272 240 M292 200 L292 240" stroke="url(%23hm_gold)" stroke-width="3"/><path d="M190 280 H322" stroke="url(%23hm_gold)" stroke-width="4" stroke-linecap="round"/></g><text x="256" y="440" font-family="system-ui, -apple-system, sans-serif" font-size="44" font-weight="900" fill="url(%23hm_gold)" text-anchor="middle" letter-spacing="6">HERMON</text><text x="256" y="475" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="%23FFFFFF" text-anchor="middle" letter-spacing="10" opacity="0.8">H E R M O N</text></svg>',
+    wins: 1,
+    losses: 2,
+    pointsFor: 121,
+    pointsAgainst: 130,
+    rank: 2,
+  },
+  {
+    id: 'team-super-class',
+    name: 'Super Class',
+    logoUrl: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100" height="100"><defs><linearGradient id="sc_gold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23DFB86C"/><stop offset="100%" stop-color="%23C1973E"/></linearGradient></defs><rect width="512" height="512" rx="100" fill="%2309090C" stroke="url(%23sc_gold)" stroke-width="8"/><g transform="translate(10, 0)"><path d="M140 180 C140 130 180 90 240 90 Q340 90 340 170 H270 C270 145 255 135 235 135 C215 135 200 145 200 170 C200 240 330 200 330 290 C330 350 280 390 220 390 C150 390 120 330 120 280 H190 C190 310 210 330 235 330 C260 330 270 310 270 290 C270 230 140 250 140 180 Z" fill="%23F2EFE9" stroke="%23000000" stroke-width="12" /><path d="M140 180 C140 130 180 90 240 90 Q340 90 340 170 H270 C270 145 255 135 235 135 C215 135 200 145 200 170 C200 240 330 200 330 290 C330 350 280 390 220 390 C150 390 120 330 120 280 H190 C190 310 210 330 235 330 C260 330 270 310 270 290 C270 230 140 250 140 180 Z" fill="%23F2EFE9" stroke="url(%23sc_gold)" stroke-width="4" /><path d="M380 140 H280 V185 H320 V290 H280 V335 H380 V290 H345 V185 H380 Z" fill="%23F2EFE9" stroke="%23000000" stroke-width="12"/><path d="M380 140 H280 V185 H320 V290 H280 V335 H380 V290 H345 V185 H380 Z" fill="%23F2EFE9" stroke="url(%23sc_gold)" stroke-width="4"/><polygon points="275,210 284,232 308,232 289,246 296,269 275,255 254,269 261,246 242,232 266,232" fill="%2309090C" stroke="url(%23sc_gold)" stroke-width="3" /></g><text x="256" y="445" font-family="system-ui, -apple-system, sans-serif" font-size="34" font-weight="900" fill="url(%23sc_gold)" text-anchor="middle" letter-spacing="4">SUPER CLASS</text></svg>',
+    wins: 1,
+    losses: 2,
+    pointsFor: 95,
+    pointsAgainst: 125,
+    rank: 3,
+  },
+  {
+    id: 'team-ents',
+    name: '树人慢脚',
+    logoUrl: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100" height="100"><defs><linearGradient id="ent_gold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23E6C387"/><stop offset="100%" stop-color="%23CBA045"/></linearGradient><linearGradient id="ent_leaves" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%234ADE80"/><stop offset="100%" stop-color="%2315803D"/></linearGradient></defs><rect width="512" height="512" rx="100" fill="%2314120E" stroke="url(%23ent_gold)" stroke-width="8"/><g transform="translate(0, -10)"><path d="M120 220 Q80 120 180 100 Q260 40 340 100 Q420 120 380 220 Q440 320 340 360 Q260 400 180 360 Q80 320 120 220 Z" fill="url(%23ent_leaves)" stroke="url(%23ent_gold)" stroke-width="4"/><path d="M180 150 L220 110 L256 140 L300 110 L340 150 L310 260 L280 320 L230 320 L190 260 Z" fill="%235C4033" stroke="%233A221D" stroke-width="6"/><path d="M210 180 L230 200 L210 220 Z M300 180 L282 200 L300 220 Z" fill="%231E120D"/><circle cx="220" cy="200" r="10" fill="%23CCF53F" stroke="%23FEF08A" stroke-width="2"/><circle cx="290" cy="200" r="10" fill="%23CCF53F" stroke="%23FEF08A" stroke-width="2"/><path d="M230 240 Q256 210 280 240 Q256 260 230 240 Z" fill="%233A221D"/><path d="M200 260 L220 310 L256 280 L290 310 L310 260" stroke="url(%23ent_gold)" stroke-width="4" fill="none"/></g><text x="256" y="425" font-family="system-ui, -apple-system, sans-serif" font-size="34" font-weight="900" fill="url(%23ent_gold)" text-anchor="middle" letter-spacing="4">树人慢脚</text><text x="256" y="465" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" fill="%23FFFFFF" text-anchor="middle" letter-spacing="6" opacity="0.8">E N T S</text></svg>',
+    wins: 1,
+    losses: 2,
+    pointsFor: 123,
+    pointsAgainst: 154,
+    rank: 4,
+  },
+];
+
+export const MOCK_PLAYERS: Player[] = [
+  // Super Class
+  { id: 'p_solomon', teamId: 'team-super-class', name: 'Solomon', number: 25, position: '后卫 (G)', avgPoints: 3.67, avgRebounds: 2.67, avgSteals: 0.67, avgBlocks: 0, gamesPlayed: 3 },
+  { id: 'p_pengnan', teamId: 'team-super-class', name: '彭楠', number: 0, position: '前锋 (F)', avgPoints: 3.67, avgRebounds: 8.67, avgSteals: 0.33, avgBlocks: 0.67, gamesPlayed: 3 },
+  { id: 'p_chenguang', teamId: 'team-super-class', name: '晨光', number: 12, position: '前锋 (F)', avgPoints: 0, avgRebounds: 1.67, avgSteals: 0.67, avgBlocks: 0, gamesPlayed: 3 },
+  { id: 'p_zhangquan', teamId: 'team-super-class', name: '张权', number: 29, position: '中锋 (C)', avgPoints: 0.67, avgRebounds: 0, avgSteals: 0, avgBlocks: 0, gamesPlayed: 3 },
+  { id: 'p_linji', teamId: 'team-super-class', name: '林吉', number: 31, position: '后卫 (G)', avgPoints: 15, avgRebounds: 4, avgSteals: 0.67, avgBlocks: 0, gamesPlayed: 3 },
+  { id: 'p_ximen', teamId: 'team-super-class', name: '西门', number: 2, position: '前锋 (F)', avgPoints: 3.33, avgRebounds: 1.67, avgSteals: 0.67, avgBlocks: 0, gamesPlayed: 3 },
+  { id: 'p_liuzhen', teamId: 'team-super-class', name: '柳真', number: 6, position: '后卫 (G)', avgPoints: 0, avgRebounds: 1.33, avgSteals: 0, avgBlocks: 0.33, gamesPlayed: 3 },
+  { id: 'p_mengzhiqiu', teamId: 'team-super-class', name: '孟知秋', number: 11, position: '前锋 (F)', avgPoints: 2.67, avgRebounds: 4.33, avgSteals: 0, avgBlocks: 0, gamesPlayed: 3 },
+  { id: 'p_limuxun', teamId: 'team-super-class', name: '李牧寻', number: 30, position: '中锋 (C)', avgPoints: 0.67, avgRebounds: 0.67, avgSteals: 0, avgBlocks: 0.33, gamesPlayed: 3 },
+
+  // 绿袍骑士
+  { id: 'p_zhipeng', teamId: 'team-green-knights', name: '志鹏', number: 20, position: '后卫 (G)', avgPoints: 2, avgRebounds: 7.33, avgSteals: 2.67, avgBlocks: 0.33, gamesPlayed: 3 },
+  { id: 'p_jiexing', teamId: 'team-green-knights', name: '洁兴', number: 21, position: '前锋 (F)', avgPoints: 0, avgRebounds: 0, avgSteals: 0, avgBlocks: 0, gamesPlayed: 3 },
+  { id: 'p_xuanyang', teamId: 'team-green-knights', name: '宣羊', number: 0, position: '后卫 (G)', avgPoints: 10.67, avgRebounds: 7, avgSteals: 2.67, avgBlocks: 0.67, gamesPlayed: 3 },
+  { id: 'p_zhangxian', teamId: 'team-green-knights', name: '章显', number: 18, position: '中锋 (C)', avgPoints: 0, avgRebounds: 1.33, avgSteals: 0.33, avgBlocks: 0, gamesPlayed: 3 },
+  { id: 'p_alan', teamId: 'team-green-knights', name: 'Alan', number: 11, position: '后卫 (G)', avgPoints: 25, avgRebounds: 5.33, avgSteals: 2.33, avgBlocks: 1.33, gamesPlayed: 3 },
+  { id: 'p_yangzhi', teamId: 'team-green-knights', name: '杨志', number: 8, position: '前锋 (F)', avgPoints: 10, avgRebounds: 6, avgSteals: 1, avgBlocks: 0, gamesPlayed: 1 },
+  { id: 'p_minqiang', teamId: 'team-green-knights', name: '敏强', number: 26, position: '后卫 (G)', avgPoints: 0, avgRebounds: 1, avgSteals: 0.33, avgBlocks: 0, gamesPlayed: 3 },
+  { id: 'p_maqing', teamId: 'team-green-knights', name: '马青', number: 5, position: '前锋 (F)', avgPoints: 1.33, avgRebounds: 3.33, avgSteals: 0.67, avgBlocks: 0, gamesPlayed: 3 },
+  { id: 'p_zhangxing', teamId: 'team-green-knights', name: '张星', number: 9, position: '后卫 (G)', avgPoints: 2.5, avgRebounds: 6.5, avgSteals: 2, avgBlocks: 0, gamesPlayed: 2 },
+  { id: 'p_yingmu', teamId: 'team-green-knights', name: '樱木', number: 10, position: '前锋 (F)', avgPoints: 13.67, avgRebounds: 3.67, avgSteals: 2.33, avgBlocks: 0.33, gamesPlayed: 3 },
+
+  // 树人慢脚
+  { id: 'p_henry', teamId: 'team-ents', name: 'Henry', number: 14, position: '后卫 (G)', avgPoints: 1, avgRebounds: 2, avgSteals: 1, avgBlocks: 0, gamesPlayed: 2 },
+  { id: 'p_leo', teamId: 'team-ents', name: 'Leo', number: 20, position: '中锋 (C)', avgPoints: 6.67, avgRebounds: 8.67, avgSteals: 0.67, avgBlocks: 0.33, gamesPlayed: 3 },
+  { id: 'p_joseph', teamId: 'team-ents', name: 'Joseph', number: 13, position: '后卫 (G)', avgPoints: 4.33, avgRebounds: 4.33, avgSteals: 1.67, avgBlocks: 0.33, gamesPlayed: 3 },
+  { id: 'p_yeh', teamId: 'team-ents', name: 'Yeh', number: 22, position: '前锋 (F)', avgPoints: 3, avgRebounds: 1.5, avgSteals: 0, avgBlocks: 0, gamesPlayed: 2 },
+  { id: 'p_scott', teamId: 'team-ents', name: 'Scott', number: 3, position: '后卫 (G)', avgPoints: 13.5, avgRebounds: 5.5, avgSteals: 0, avgBlocks: 0, gamesPlayed: 2 },
+  { id: 'p_liangsen', teamId: 'team-ents', name: '梁森', number: 15, position: '前锋 (F)', avgPoints: 8, avgRebounds: 3.5, avgSteals: 0, avgBlocks: 0, gamesPlayed: 2 },
+  { id: 'p_hengxin', teamId: 'team-ents', name: '衡鑫', number: 4, position: '后卫 (G)', avgPoints: 0, avgRebounds: 0, avgSteals: 0, avgBlocks: 0, gamesPlayed: 1 },
+  { id: 'p_yangle', teamId: 'team-ents', name: '杨乐', number: 6, position: '前锋 (F)', avgPoints: 1, avgRebounds: 12.5, avgSteals: 0.5, avgBlocks: 1, gamesPlayed: 2 },
+  { id: 'p_jimi', teamId: 'team-ents', name: '吉米', number: 16, position: '后卫 (G)', avgPoints: 7.33, avgRebounds: 3, avgSteals: 1.67, avgBlocks: 0.33, gamesPlayed: 3 },
+
+  // 黑门
+  { id: 'p_zhuangwenbin', teamId: 'team-black-gate', name: '庄文斌', number: 17, position: '中锋 (C)', avgPoints: 9.5, avgRebounds: 8.5, avgSteals: 1, avgBlocks: 1.5, gamesPlayed: 2 },
+  { id: 'p_baixiong', teamId: 'team-black-gate', name: '白熊', number: 1, position: '中锋 (C)', avgPoints: 10.67, avgRebounds: 10.33, avgSteals: 1.33, avgBlocks: 0.33, gamesPlayed: 3 },
+  { id: 'p_yunshang', teamId: 'team-black-gate', name: '云尚', number: 17, position: '前锋 (F)', avgPoints: 2.67, avgRebounds: 1, avgSteals: 0.67, avgBlocks: 0, gamesPlayed: 3 },
+  { id: 'p_songliangren', teamId: 'team-black-gate', name: '宋良仁', number: 1, position: '后卫 (G)', avgPoints: 8, avgRebounds: 1.33, avgSteals: 2, avgBlocks: 0, gamesPlayed: 3 },
+  { id: 'p_buluofen', teamId: 'team-black-gate', name: '布洛芬', number: 23, position: '后卫 (G)', avgPoints: 0.67, avgRebounds: 0.67, avgSteals: 0.33, avgBlocks: 0, gamesPlayed: 3 },
+  { id: 'p_qian', teamId: 'team-black-gate', name: '浅', number: 9, position: '前锋 (F)', avgPoints: 0, avgRebounds: 0, avgSteals: 0, avgBlocks: 0, gamesPlayed: 3 },
+  { id: 'p_zhanghanqing', teamId: 'team-black-gate', name: '张汉卿', number: 7, position: '后卫 (G)', avgPoints: 3.33, avgRebounds: 3.33, avgSteals: 1.33, avgBlocks: 0.33, gamesPlayed: 3 },
+  { id: 'p_xiaoya', teamId: 'team-black-gate', name: '小亚', number: 7, position: '后卫 (G)', avgPoints: 0, avgRebounds: 0, avgSteals: 0, avgBlocks: 0, gamesPlayed: 3 },
+];
+
+export const MOCK_GAMES: Game[] = [
+  {
+    id: 'g1',
+    homeTeamId: 'team-super-class',
+    awayTeamId: 'team-green-knights',
+    homeScore: 35,
+    awayScore: 62,
+    date: '2026-04-18T16:00:00Z',
+    status: 'finished',
+    venue: '渝航体育金山运动中心',
+  },
+  {
+    id: 'g2',
+    homeTeamId: 'team-green-knights',
+    awayTeamId: 'team-ents',
+    homeScore: 66,
+    awayScore: 39,
+    date: '2026-04-25T18:00:00Z',
+    status: 'finished',
+    venue: '渝航体育金山运动中心',
+  },
+  {
+    id: 'g3',
+    homeTeamId: 'team-super-class',
+    awayTeamId: 'team-black-gate',
+    homeScore: 21,
+    awayScore: 29,
+    date: '2026-04-25T19:30:00Z',
+    status: 'finished',
+    venue: '渝航体育金山运动中心',
+  },
+  {
+    id: 'g4',
+    homeTeamId: 'team-super-class',
+    awayTeamId: 'team-ents',
+    homeScore: 39,
+    awayScore: 34,
+    date: '2026-05-09T17:00:00Z',
+    status: 'finished',
+    venue: '石子山体育公园篮球场3号场（非木地板）',
+  },
+  {
+    id: 'g5',
+    homeTeamId: 'team-green-knights',
+    awayTeamId: 'team-black-gate',
+    homeScore: 59,
+    awayScore: 43,
+    date: '2026-05-09T18:30:00Z',
+    status: 'finished',
+    venue: '石子山体育公园篮球场3号场（非木地板）',
+  },
+  {
+    id: 'g6',
+    homeTeamId: 'team-black-gate',
+    awayTeamId: 'team-ents',
+    homeScore: 49,
+    awayScore: 50,
+    date: '2026-05-23T14:00:00Z',
+    status: 'finished',
+    venue: '石子山体育公园篮球场3号场（非木地板）',
+  },
+  {
+    id: 'g_playoff_sf1',
+    homeTeamId: 'team-green-knights',
+    awayTeamId: 'team-ents',
+    homeScore: 0,
+    awayScore: 0,
+    date: '2026-05-30T17:00:00Z',
+    status: 'scheduled',
+    venue: '待定',
+    stage: 'semifinal_1',
+  },
+  {
+    id: 'g_playoff_sf2',
+    homeTeamId: 'team-black-gate',
+    awayTeamId: 'team-super-class',
+    homeScore: 0,
+    awayScore: 0,
+    date: '2026-05-30T18:30:00Z',
+    status: 'scheduled',
+    venue: '待定',
+    stage: 'semifinal_2',
+  },
+  {
+    id: 'g_playoff_f1',
+    homeTeamId: 'team-green-knights',
+    awayTeamId: 'team-black-gate',
+    homeScore: 0,
+    awayScore: 0,
+    date: '2026-06-06T18:00:00Z',
+    status: 'scheduled',
+    venue: '待定',
+    stage: 'final_1',
+  },
+];
+
+export const MOCK_NEWS: News[] = [
+  {
+    id: 'n2',
+    title: 'MEBA常规赛收官！季后赛战鼓隆隆，5月30日巅峰对决在即',
+    content: '各位平安，MEBA 2026赛季篮球常规赛赛事在本周六（5月23日）后就全部落下了帷幕。目前首轮常规赛积分排名尘埃落定：绿袍骑士以 3 胜 0 负稳居第一名，黑门（Hermon）以极微弱的得失分优势力压 Super Class 和 树人慢脚取得第 2名，Super Class 取得第 3 名，树人慢脚居第 4 名。\n\n接下来的几周，MEBA 将开启更加热血、激烈的季后赛赛制！对决双方将严格根据常规赛胜场排名对战：\n在 5 月 30 日（下周六）进行的半决赛中：\n- 常规赛第一名（绿袍骑士） VS 常规赛第四名（树人慢脚）\n- 常规赛第二名（黑门） VS 常规赛第三名（Super Class）\n\n本阶段除总决赛赛制为“三局两胜”（Best of 3）外，其余所有季后赛对决均采用“单败淘汰制”，一次定胜负，败者直接出局。战歌已奏响，究竟谁能突出重围挺进总决赛？让我们拭目以待！',
+    imageUrl: 'https://images.unsplash.com/photo-1519766304817-4f37bda74a27?auto=format&fit=crop&q=80&w=800',
+    date: '2026-05-23T22:00:00Z',
+  },
+  {
+    id: 'n1',
+    title: 'MEBA 中土篮球联赛激战正酣！最新战绩出炉',
+    content: '伴随着 5 月 23 日由树人慢脚以 50 比 49 一分惊险战胜黑门队，MEBA 第一阶段常规赛激战正酣！目前绿袍骑士以 3 胜 0 负的骄人战绩一马当先，高居积分榜首。黑门、Super Class 和 树人慢脚则均录得 1 胜 2 负。战火重燃，精彩持续进行！',
+    imageUrl: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&q=80&w=800',
+    date: '2026-05-23T21:00:00Z',
+  },
+];
