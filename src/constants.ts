@@ -163,7 +163,7 @@ export const MOCK_GAMES: Game[] = [
     awayScore: 0,
     date: '2026-05-30T17:00:00Z',
     status: 'scheduled',
-    venue: '待定',
+    venue: '暂定',
     stage: 'semifinal_1',
     isTentative: true,
   },
@@ -175,7 +175,7 @@ export const MOCK_GAMES: Game[] = [
     awayScore: 0,
     date: '2026-05-30T18:30:00Z',
     status: 'scheduled',
-    venue: '待定',
+    venue: '暂定',
     stage: 'semifinal_2',
     isTentative: true,
   },
@@ -187,8 +187,9 @@ export const MOCK_GAMES: Game[] = [
     awayScore: 0,
     date: '2026-06-06T18:00:00Z',
     status: 'scheduled',
-    venue: '待定',
+    venue: '暂定',
     stage: 'final_1',
+    isTentative: true,
   },
 ];
 

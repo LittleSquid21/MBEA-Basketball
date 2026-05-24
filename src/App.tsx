@@ -683,9 +683,35 @@ export default function App() {
         (() => {
           const game = displayGames.find(g => g.id === selectedGameIdForModal);
           if (!game) return null;
-          const homeTeam = displayTeams.find(t => t.id === game.homeTeamId);
-          const awayTeam = displayTeams.find(t => t.id === game.awayTeamId);
+          
+          let homeTeam = displayTeams.find(t => t.id === game.homeTeamId);
+          let awayTeam = displayTeams.find(t => t.id === game.awayTeamId);
+
+          if (game.id.startsWith('g_playoff_f') || (game.stage?.includes('final') && !game.stage?.includes('semi'))) {
+            const sf1 = displayGames.find(g => g.id === 'g_playoff_sf1');
+            const sf2 = displayGames.find(g => g.id === 'g_playoff_sf2');
+            
+            const sf1Finished = sf1?.status === 'finished';
+            const sf2Finished = sf2?.status === 'finished';
+
+            const sf1WinnerId = sf1Finished ? (sf1.homeScore > sf1.awayScore ? sf1.homeTeamId : sf1.awayTeamId) : null;
+            const sf2WinnerId = sf2Finished ? (sf2.homeScore > sf2.awayScore ? sf2.homeTeamId : sf2.awayTeamId) : null;
+
+            if (!sf1WinnerId) {
+              homeTeam = { id: 'pending-sf1', name: '半决赛 1 胜者 (暂定)', wins: 0, losses: 0, rank: 0, pointsFor: 0, pointsAgainst: 0, logoUrl: '' };
+            } else {
+              homeTeam = displayTeams.find(t => t.id === sf1WinnerId);
+            }
+
+            if (!sf2WinnerId) {
+              awayTeam = { id: 'pending-sf2', name: '半决赛 2 胜者 (暂定)', wins: 0, losses: 0, rank: 0, pointsFor: 0, pointsAgainst: 0, logoUrl: '' };
+            } else {
+              awayTeam = displayTeams.find(t => t.id === sf2WinnerId);
+            }
+          }
+
           const date = new Date(game.date);
+          const isGameTentative = game.isTentative || (game.id.startsWith('g_playoff_') && game.status !== 'finished');
 
           return (
             <div className="fixed inset-0 z-[90] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
@@ -709,8 +735,9 @@ export default function App() {
                   <div className="text-center space-y-2">
                     <div className="text-slate-400 text-sm font-bold">
                       {date.toLocaleDateString('zh-CN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}
+                      {isGameTentative && <span className="text-accent-gold text-xs ml-1">(暂定)</span>}
                     </div>
-                    {game.isTentative ? (
+                    {isGameTentative ? (
                       <div className="text-accent-gold text-lg font-black flex items-center justify-center gap-1.5 animate-pulse bg-accent-gold/10 border border-accent-gold/20 px-4 py-1.5 rounded-full inline-flex mx-auto scale-95">
                         <Clock size={16} />
                         时间暂定
@@ -721,7 +748,7 @@ export default function App() {
                         {date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'UTC' })}
                       </div>
                     )}
-                    <div className="text-slate-500 text-sm font-medium">球馆: {game.venue}</div>
+                    <div className="text-slate-500 text-sm font-medium">球馆: {isGameTentative ? '地点暂定' : game.venue}</div>
                   </div>
 
                   <div className="flex items-center justify-between gap-4 py-6 bg-white/5 rounded-2xl px-6 border border-white/5">

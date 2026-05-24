@@ -11,6 +11,9 @@ export default function TeamLogo({ teamId, logoUrl, className, ...props }: TeamL
   // Map team IDs/names to user uploaded high-resolution assets in /public
   const getLocalUrl = (id: string) => {
     const cleanId = id.toLowerCase();
+    if (cleanId.startsWith('pending-')) {
+      return 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="50" fill="%230F172A" stroke="%23DFB86C" stroke-width="2"/><text x="50" y="58" font-family="system-ui, sans-serif" font-size="32" font-weight="950" fill="%23DFB86C" text-anchor="middle">?</text></svg>';
+    }
     if (cleanId.includes('green') || cleanId.includes('绿袍') || cleanId.includes('骑士')) return '/绿袍.png';
     if (cleanId.includes('black') || cleanId.includes('gate') || cleanId.includes('黑门') || cleanId.includes('hermon')) return '/黑门.png';
     if (cleanId.includes('super') || cleanId.includes('sc') || cleanId.includes('class')) return '/SC.png';

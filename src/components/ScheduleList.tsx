@@ -34,9 +34,35 @@ export default function ScheduleList({ games, teams, onSelectGame }: ScheduleLis
           return found;
         };
 
-        const homeTeam = getTeamDetails(game.homeTeamId);
-        const awayTeam = getTeamDetails(game.awayTeamId);
+        let homeTeam = getTeamDetails(game.homeTeamId);
+        let awayTeam = getTeamDetails(game.awayTeamId);
+
+        // Override undecided playoff finals teams in the main schedule section
+        if (game.id.startsWith('g_playoff_f') || (game.stage?.includes('final') && !game.stage?.includes('semi'))) {
+          const sf1 = games.find(g => g.id === 'g_playoff_sf1');
+          const sf2 = games.find(g => g.id === 'g_playoff_sf2');
+          
+          const sf1Finished = sf1?.status === 'finished';
+          const sf2Finished = sf2?.status === 'finished';
+
+          const sf1WinnerId = sf1Finished ? (sf1.homeScore > sf1.awayScore ? sf1.homeTeamId : sf1.awayTeamId) : null;
+          const sf2WinnerId = sf2Finished ? (sf2.homeScore > sf2.awayScore ? sf2.homeTeamId : sf2.awayTeamId) : null;
+
+          if (!sf1WinnerId) {
+            homeTeam = { id: 'pending-sf1', name: '半决赛 1 胜者 (暂定)', wins: 0, losses: 0, rank: 0, pointsFor: 0, pointsAgainst: 0 };
+          } else {
+            homeTeam = getTeamDetails(sf1WinnerId);
+          }
+
+          if (!sf2WinnerId) {
+            awayTeam = { id: 'pending-sf2', name: '半决赛 2 胜者 (暂定)', wins: 0, losses: 0, rank: 0, pointsFor: 0, pointsAgainst: 0 };
+          } else {
+            awayTeam = getTeamDetails(sf2WinnerId);
+          }
+        }
+
         const date = new Date(game.date);
+        const isTentative = game.isTentative || (game.id.startsWith('g_playoff_') && game.status !== 'finished');
 
         return (
           <Card 
@@ -48,10 +74,11 @@ export default function ScheduleList({ games, teams, onSelectGame }: ScheduleLis
               <div className="flex flex-col md:flex-row items-center">
                 {/* Game Info */}
                 <div className="w-full md:w-48 p-6 bg-white/5 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/10">
-                  <div className="text-zinc-400 text-sm font-bold mb-1">
+                  <div className="text-zinc-400 text-sm font-bold mb-1 flex items-center gap-1">
                     {date.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric', timeZone: 'UTC' })}
+                    {isTentative && <span className="text-accent-gold text-xs">(暂定)</span>}
                   </div>
-                  {game.isTentative ? (
+                  {isTentative ? (
                     <div className="flex items-center gap-1 text-accent-gold font-bold mb-2 text-xs bg-accent-gold/10 border border-accent-gold/20 px-2 py-0.5 rounded-full">
                       <Clock size={12} className="text-accent-gold" />
                       时间暂定
@@ -75,7 +102,7 @@ export default function ScheduleList({ games, teams, onSelectGame }: ScheduleLis
                       logoUrl={homeTeam?.logoUrl} 
                       className="w-16 h-16 rounded-full bg-zinc-800 object-cover border-2 border-white/5 group-hover:scale-110 transition-transform"
                     />
-                    <span className="font-bold text-white text-center">{homeTeam?.name}</span>
+                    <span className="font-bold text-white text-center text-sm md:text-base">{homeTeam?.name}</span>
                   </div>
 
                   <div className="flex flex-col items-center gap-2">
@@ -86,7 +113,7 @@ export default function ScheduleList({ games, teams, onSelectGame }: ScheduleLis
                     </div>
                     <div className="flex items-center gap-1 text-zinc-500 text-xs font-medium">
                       <MapPin size={12} />
-                      {game.venue}
+                      {isTentative ? '地点暂定' : game.venue}
                     </div>
                   </div>
 
@@ -96,7 +123,7 @@ export default function ScheduleList({ games, teams, onSelectGame }: ScheduleLis
                       logoUrl={awayTeam?.logoUrl} 
                       className="w-16 h-16 rounded-full bg-zinc-800 object-cover border-2 border-white/5 group-hover:scale-110 transition-transform"
                     />
-                    <span className="font-bold text-white text-center">{awayTeam?.name}</span>
+                    <span className="font-bold text-white text-center text-sm md:text-base">{awayTeam?.name}</span>
                   </div>
                 </div>
               </div>

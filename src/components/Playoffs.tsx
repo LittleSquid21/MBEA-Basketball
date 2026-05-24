@@ -175,11 +175,11 @@ export default function Playoffs({ games, teams, isAdmin }: PlayoffsProps) {
           </h2>
           <p className="text-slate-400 text-sm md:text-base leading-relaxed max-w-2xl">
             常规赛圆满收官！季后赛根据胜场排名，由 <strong className="text-white">第一名对战第四名</strong>（绿袍骑士 VS 树人慢脚），<strong className="text-white">第二名对战第三名</strong>（黑门 VS Super Class）。
-            半决赛为一场定胜负，胜者会师最高舞台。总决赛采用三局两胜制（Best of 3）决出本届 MEBA 年度总冠军！
+            半决赛为一场定胜负，时间与地点均暂定。胜者会师最高舞台进行总决赛，总决赛采用三局两胜制（Best of 3）决出本届 MEBA 年度总冠军！
           </p>
         </div>
       </div>
-
+ 
       {/* Visual Tournament Bracket */}
       <div className="relative bg-slate-950/40 backdrop-blur-md rounded-[2.5rem] border border-white/5 p-6 md:p-12 shadow-inner overflow-x-auto min-w-full">
         <div id="bracket-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 items-center min-w-[760px] relative py-8">
@@ -187,9 +187,9 @@ export default function Playoffs({ games, teams, isAdmin }: PlayoffsProps) {
           {/* Section: Semifinals (Left, cols: 5) */}
           <div className="col-span-1 md:col-span-1 lg:col-span-5 space-y-12">
             <h3 className="text-sm font-black uppercase tracking-widest text-slate-500 font-mono mb-2 flex items-center gap-2 px-1">
-              <span>⚡</span> 半决赛 (一场制) • 5月30日
+              <span>⚡</span> 半决赛 (一场制) • 时间暂定
             </h3>
-
+ 
             {/* Match 1 Card */}
             <div className="relative group">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl opacity-0 group-hover:opacity-10 blur transition duration-500" />
@@ -197,9 +197,9 @@ export default function Playoffs({ games, teams, isAdmin }: PlayoffsProps) {
                 <CardContent className="p-5 space-y-4">
                   <div className="flex items-center justify-between text-xs text-slate-500 font-mono">
                     <span className="bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full font-bold">半决赛 1</span>
-                    <span className="flex items-center gap-1"><Clock size={12} /> 17:00</span>
+                    <span className="text-accent-gold font-bold flex items-center gap-1"><Clock size={12} /> 时间暂定</span>
                   </div>
-
+ 
                   <div className="space-y-3">
                     {/* Home Team (1st) */}
                     <TeamRow 
@@ -212,7 +212,7 @@ export default function Playoffs({ games, teams, isAdmin }: PlayoffsProps) {
                     
                     {/* Divider */}
                     <div className="h-[1px] bg-white/5" />
-
+ 
                     {/* Away Team (4th) */}
                     <TeamRow 
                       team={getTeam(sf1.awayTeamId)}  
@@ -222,10 +222,10 @@ export default function Playoffs({ games, teams, isAdmin }: PlayoffsProps) {
                       rank={4}
                     />
                   </div>
-
+ 
                   {/* Match Info */}
                   <div className="flex items-center justify-between pt-2 border-t border-white/5 text-[10px] text-slate-500 font-bold whitespace-nowrap overflow-hidden">
-                    <span className="truncate flex items-center gap-1"><MapPin size={10} /> {sf1.venue || '待定'}</span>
+                    <span className="truncate flex items-center gap-1"><MapPin size={10} /> 地点暂定</span>
                     {isAdmin && (
                       <button 
                         onClick={() => startEdit(sf1)}
@@ -238,7 +238,7 @@ export default function Playoffs({ games, teams, isAdmin }: PlayoffsProps) {
                 </CardContent>
               </Card>
             </div>
-
+ 
             {/* Match 2 Card */}
             <div className="relative group">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl opacity-0 group-hover:opacity-10 blur transition duration-500" />
@@ -246,9 +246,9 @@ export default function Playoffs({ games, teams, isAdmin }: PlayoffsProps) {
                 <CardContent className="p-5 space-y-4">
                   <div className="flex items-center justify-between text-xs text-slate-500 font-mono">
                     <span className="bg-blue-500/10 text-blue-400 px-2.5 py-1 rounded-full font-bold">半决赛 2</span>
-                    <span className="flex items-center gap-1"><Clock size={12} /> 18:30</span>
+                    <span className="text-accent-gold font-bold flex items-center gap-1"><Clock size={12} /> 时间暂定</span>
                   </div>
-
+ 
                   <div className="space-y-3">
                     {/* Home Team (2nd) */}
                     <TeamRow 
@@ -261,7 +261,7 @@ export default function Playoffs({ games, teams, isAdmin }: PlayoffsProps) {
                     
                     {/* Divider */}
                     <div className="h-[1px] bg-white/5" />
-
+ 
                     {/* Away Team (3rd) */}
                     <TeamRow 
                       team={getTeam(sf2.awayTeamId)} 
@@ -271,10 +271,10 @@ export default function Playoffs({ games, teams, isAdmin }: PlayoffsProps) {
                       rank={3}
                     />
                   </div>
-
+ 
                   {/* Match Info */}
                   <div className="flex items-center justify-between pt-2 border-t border-white/5 text-[10px] text-slate-500 font-bold">
-                    <span className="truncate flex items-center gap-1"><MapPin size={10} /> {sf2.venue || '待定'}</span>
+                    <span className="truncate flex items-center gap-1"><MapPin size={10} /> 地点暂定</span>
                     {isAdmin && (
                       <button 
                         onClick={() => startEdit(sf2)}
@@ -287,9 +287,9 @@ export default function Playoffs({ games, teams, isAdmin }: PlayoffsProps) {
                 </CardContent>
               </Card>
             </div>
-
+ 
           </div>
-
+ 
           {/* Connection Visual (Middle representation, cols: 2) */}
           <div className="hidden lg:col-span-2 lg:flex flex-col justify-around h-full py-20 relative pointer-events-none text-slate-700">
             <div className="h-1/2 w-full flex items-center relative">
@@ -298,13 +298,13 @@ export default function Playoffs({ games, teams, isAdmin }: PlayoffsProps) {
               <div className="w-1/2 h-[1px] bg-gradient-to-r from-white/10 to-accent-gold/40 absolute left-1/2" />
             </div>
           </div>
-
+ 
           {/* Section: Finals (Right, cols: 5) */}
           <div className="col-span-1 md:col-span-1 lg:col-span-5 space-y-6">
             <h3 className="text-sm font-black uppercase tracking-widest text-accent-gold font-mono mb-2 flex items-center gap-2 px-1">
-              <span>🏆</span> 总决赛 (三局两胜) • 6月6号起
+              <span>🏆</span> 总决赛 (三局两胜) • 暂定
             </h3>
-
+ 
             {/* Final Game 1 Card */}
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-accent-gold to-yellow-500 rounded-3xl opacity-10 group-hover:opacity-20 blur-md transition duration-500" />
@@ -314,9 +314,9 @@ export default function Playoffs({ games, teams, isAdmin }: PlayoffsProps) {
                     <span className="bg-accent-gold text-black font-black px-3 py-1 rounded-full text-[10px] uppercase tracking-wider">
                       三局两胜第一场
                     </span>
-                    <span className="text-slate-400 font-bold flex items-center gap-1"><Clock size={12} /> 6/6 18:00</span>
+                    <span className="text-accent-gold font-bold flex items-center gap-1"><Clock size={12} /> 时间暂定</span>
                   </div>
-
+ 
                   <div className="space-y-4">
                     {/* Home Winner Placeholder/Dynamic */}
                     <FinalTeamRow 
@@ -326,14 +326,14 @@ export default function Playoffs({ games, teams, isAdmin }: PlayoffsProps) {
                       isWinner={f1.status === 'finished' && f1.homeScore > f1.awayScore}
                       placeholderText="半决赛 1 胜者" 
                     />
-
+ 
                     {/* VS */}
                     <div className="flex items-center gap-2">
-                      <div className="h-[1px] bg-white/10 flex-grow" />
+                       <div className="h-[1px] bg-white/10 flex-grow" />
                       <span className="text-[10px] font-mono text-slate-600 tracking-widest font-black uppercase">VS</span>
                       <div className="h-[1px] bg-white/10 flex-grow" />
                     </div>
-
+ 
                     {/* Away Winner Placeholder/Dynamic */}
                     <FinalTeamRow 
                       team={sf2WinnerId ? getTeam(sf2WinnerId) : undefined} 
@@ -343,10 +343,10 @@ export default function Playoffs({ games, teams, isAdmin }: PlayoffsProps) {
                       placeholderText="半决赛 2 胜者" 
                     />
                   </div>
-
+ 
                   {/* Venue and Score controls */}
                   <div className="flex items-center justify-between pt-3 border-t border-white/5 text-xs text-slate-400 font-bold">
-                    <span className="truncate flex items-center gap-1"><MapPin size={10} /> {f1.venue || '待定'}</span>
+                    <span className="truncate flex items-center gap-1"><MapPin size={10} /> 地点暂定</span>
                     {isAdmin && sf1WinnerId && sf2WinnerId && (
                       <button 
                         onClick={() => startEdit(f1)}
@@ -359,16 +359,20 @@ export default function Playoffs({ games, teams, isAdmin }: PlayoffsProps) {
                 </CardContent>
               </Card>
             </div>
-
+ 
             {/* Dynamic details for best of 3 series if needed */}
             <div className="grid grid-cols-2 gap-4 text-xs font-mono font-bold text-slate-500">
               <div className="bg-slate-900/40 rounded-xl p-3 border border-white/5 text-center space-y-1">
                 <div className="text-[10px] text-zinc-500 uppercase">总决赛第二场 (G2)</div>
-                <div className="text-zinc-400">6月13日 18:00</div>
+                <div className="text-accent-gold font-bold flex items-center justify-center gap-1">
+                  <Clock size={12} /> 时间暂定
+                </div>
               </div>
               <div className="bg-slate-900/40 rounded-xl p-3 border border-white/5 text-center space-y-1">
                 <div className="text-[10px] text-zinc-500 uppercase">总决赛第三场 (G3)</div>
-                <div className="text-zinc-400">若有需要：6月20日</div>
+                <div className="text-accent-gold font-bold flex items-center justify-center gap-1">
+                  <Clock size={12} /> 时间暂定
+                </div>
               </div>
             </div>
 
